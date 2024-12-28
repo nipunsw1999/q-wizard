@@ -96,6 +96,10 @@ else:
             percentage = total * 100 / grand_total
             grade, message = get_grade_and_message(percentage)
     if percentage > 50:
+        if percentage < 0:
+            percentage = 0
+        else:
+            percentage = percentage
         st.header(f":green[Full marks: {percentage:.2f}%]")
         st.subheader(f":green[Grade: {grade}] 🎉")
         st.write(f":violet[{message}]")
