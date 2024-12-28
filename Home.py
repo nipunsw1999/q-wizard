@@ -15,10 +15,9 @@ if 'stat' not in st.session_state:
     st.session_state['stat'] = 0
 
 openai_api_key = os.getenv("OPENAI_API_KEY")
-if not openai_api_key:
-    st.error("OpenAI API key not found. Please check your .env file.")
-else:
-    openai.api_key = openai_api_key
+# openai_api_key = os.getenv("OPENAI_API_KEY")
+# openai.api_key = openai_api_key
+# os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 def check_possibility(text):
     prompt = f"""
