@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 import openai
 import time
+import json
 
 st.sidebar.image("logo.png", width=800) 
 
@@ -62,11 +63,18 @@ def generate_questions_from_text(text, question_count,difficulty):
     topic: {text}
     """
     response = openai.ChatCompletion.create(
-        model="gpt-4o",
+        model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7,
     )
-    return response.choices[0].message['content']
+    content = response.choices[0].message['content']
+    # Parse JSON response safely
+    try:
+        parsed_json = json.loads(content)
+        return parsed_json
+    except json.JSONDecodeError:
+        st.error("Failed to parse the response as valid JSON. Please try again.")
+        return None
 
 def inf(text:str,seconds:int,done_display_time: int = 2):
     done_message = st.empty()
