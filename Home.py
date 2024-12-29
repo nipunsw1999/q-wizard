@@ -23,8 +23,21 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 def check_possibility(text):
     with st.spinner("Checking..."):
         prompt = f"""
-        Analyze the following text and determine if it is possible to generate meaningful questions based on it. If the text is unsuitable for generating questions (e.g., random characters, gibberish, or completely unrelated topics), respond with NO. Otherwise, respond with YES. Examples of suitable text include topics, keywords, or sentences. Text: {text}
+        Analyze the following text and determine if it is possible to generate meaningful questions based on it. 
+
+        ### Criteria:
+        1. If the text is random characters, gibberish, or completely unrelated topics, respond with "NO."
+        2. If the text is a person’s name:
+        - Respond with "NO" if the person is unknown or lacks information available on the internet.
+        - Respond with "YES" if the person is famous or well-documented online.
+        3. If the text is the name of an app:
+        - Respond with "NO" if the app is unknown or not widely recognized.
+        - Respond with "YES" if the app is popular or has notable information available online.
+        4. Otherwise, if the text is a valid topic, keyword, or sentence suitable for generating meaningful questions, respond with "YES."
+
+        Text: {text}
         """
+
 
 
         response = openai.ChatCompletion.create(
