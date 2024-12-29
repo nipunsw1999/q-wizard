@@ -120,7 +120,7 @@ if st.session_state['stat'] == 0:
     )
 
 
-    topic = st.text_area("Enter your topic")
+    topic = st.text_area("Enter a topic (Tip: Use a clear and specific topic for the best results!)")
 
     start = st.button("Generate Quiz")
 
