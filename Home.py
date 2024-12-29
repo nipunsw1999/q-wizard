@@ -20,17 +20,18 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 # os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 def check_possibility(text):
-    prompt = f"""
-    Analyze the following text and determine if it is possible to generate meaningful questions based on it. If the text is unsuitable for generating questions (e.g., random characters, gibberish, or completely unrelated topics), respond with NO. Otherwise, respond with YES. Examples of suitable text include topics, keywords, or sentences. Text: {text}
-    """
+    with st.spinner("Generating..."):
+        prompt = f"""
+        Analyze the following text and determine if it is possible to generate meaningful questions based on it. If the text is unsuitable for generating questions (e.g., random characters, gibberish, or completely unrelated topics), respond with NO. Otherwise, respond with YES. Examples of suitable text include topics, keywords, or sentences. Text: {text}
+        """
 
 
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0,
-    ) 
-    # st.write(response.choices[0].message['content'])
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0,
+        ) 
+        # st.write(response.choices[0].message['content'])
     return response.choices[0].message['content']
 
 def generate_questions_from_text(text, question_count,difficulty):
@@ -61,7 +62,7 @@ def generate_questions_from_text(text, question_count,difficulty):
     topic: {text}
     """
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7,
     )
