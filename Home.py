@@ -134,7 +134,7 @@ if st.session_state['stat'] == 0:
                 with st.spinner("Generating..."):
                     st.session_state['quiz'] = (generate_questions_from_text(topic,questions,difficulty_level))
                     st.session_state['stat'] = 1
-                completed("Quiz generation completed")
+                completed("Quiz Generated")
                 st.page_link("pages/Quiz.py", label=":green[Start]", icon="✍️")
 
 else:
