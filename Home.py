@@ -35,7 +35,7 @@ def check_possibility(text):
 
 def generate_questions_from_text(text, question_count,difficulty):
     prompt = f"""
-    You are an intelligent person to generate questions.
+    You are an intelligent person to generate questions. Your answers and correct answers must be correct 100% and meaningful. 
     Generate {question_count} multiple-choice {difficulty} questions from the following text.
     Format the output as JSON with the structure:
     {{
