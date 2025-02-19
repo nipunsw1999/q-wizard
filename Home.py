@@ -48,10 +48,10 @@ def check_possibility(text):
         # st.write(response.choices[0].message['content'])
     return response.choices[0].message['content']
 
-def generate_questions_from_text(text, question_count,difficulty):
+def generate_questions_from_text(text, question_count,per):
     prompt = f"""
-    You are an intelligent person to generate questions. Your answers and correct answers must be correct 100% and meaningful. 
-    Generate {question_count} multiple-choice {difficulty} questions from the following text.
+    You are an intelligent person to generate questions. Your answers and correct answers must be correct 100% and meaningful. Generate questions dificultally level should {per}/3.
+    Generate {question_count} multiple-choice questions from the following text.
     Format the output as JSON with the structure:
     {{
         "1": {{
@@ -112,7 +112,7 @@ if st.session_state['stat'] == 0:
         ["Easy", "Intermediate", "Hard"],
         key="difficulty_level_slider"
     )
-
+    
     questions = st.select_slider(
         "Choose Number of Questions",
         [5,10, 15, 20,25,30,40,50],
@@ -124,7 +124,11 @@ if st.session_state['stat'] == 0:
 
     start = st.button("Generate Quiz")
 
+    per = 1
     if start:
+        if difficulty_level == "Easy": per = 1
+        elif difficulty_level == "Intermediate": per = 2
+        elif difficulty_level == "Hard": per = 3
         if topic == "":
             inf("Please enter a topic to continue",2)
         else:
@@ -132,7 +136,7 @@ if st.session_state['stat'] == 0:
                 inf("Sorry, we cannot generate a quiz on this topic. Please try another one.",2)
             else:
                 with st.spinner("Generating..."):
-                    st.session_state['quiz'] = (generate_questions_from_text(topic,questions,difficulty_level))
+                    st.session_state['quiz'] = (generate_questions_from_text(topic,questions,per))
                     st.session_state['stat'] = 1
                 completed("Quiz Generated")
                 st.page_link("pages/Quiz.py", label=":green[Start]", icon="✍️")
