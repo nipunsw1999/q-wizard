@@ -1,6 +1,6 @@
 # MCQ Question Generator App - QWizard
 
-This is an **MCQ Question Generator App** that allows you to generate multiple-choice questions based on a given topic. You can:
+This is a **MCQ Question Generator App** that allows you to generate multiple-choice questions based on a given topic. You can:
 
 ✅ Enter a topic of your choice  
 ✅ Select the difficulty level  
