@@ -115,7 +115,7 @@ if st.session_state['stat'] == 0:
     
     questions = st.select_slider(
         "Choose Number of Questions",
-        [5,10, 15, 20,25,30,40,50],
+        [5,10, 15, 20,25],
         key="questions_slider"
     )
 
